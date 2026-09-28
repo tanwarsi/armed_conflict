@@ -102,21 +102,41 @@ dim(regions)
 #filter %>% group_by(country_name) %>% filter(countre_name= )
 filtered <- filter(regions, country_code%in% countries$country_ISO)
 filtered
+
+##fix
 ```
-*
 
 
 ## Tabulate countries by region and sub-region
 
 Next, we want to find out how many countries are in a region. Use the `group_by()` and `summarise()` functions in the `dplyr` package to count the number of countries in each region. Then use the `kable()` function in the `knitr` package to create a simple table with the column headers, "Region" and "Count". 
 
-<!-- Put code chunk here -->
+```{r}
+#| echo: FALSE
 
+countries_in_region<- regions %>%
+  group_by(region) %>%
+  summarise(total_count = n())
+#, count= lenght(country_name))
+
+kable(countries_in_region, col.names = c("Region", "Count"))
+##need to fix this
+
+```
 
 Create a similar table that shows the number of countries in each **sub-region**.
 
-<!-- Put code chunk here -->
+```{r}
+#| echo: FALSE
 
+countries_in_sub_region<- regions %>%
+  group_by(sub_region) %>%
+  summarise(count=length(country_name))
+
+kable(countries_in_sub_region, col.names = c("Sub-Region", "Count"))
+###fix
+
+```
 
 
 ## Data visualization using ggplot
@@ -127,5 +147,14 @@ Here, we will use `geom_bar()` function within `ggplot()` to create a bar chart 
 2. Create bars that run horizontally where sub-region names appear along the y-axis. 
 3. Order the bars such that the sub-region with the most number countries appear at the top and the sub-region with the least number of countries appear at the bottom. 
 
-<!-- Put code chunk here -->
+```{r}
+#| echo: FALSE
 
+countries_in_sub_region<- regions %>%
+  group_by(sub_region) %>%
+  summarise(count=length(country_name))
+
+kable(countries_in_sub_region, col.names = c("Sub-Region", "Count"))
+###fix
+
+```
