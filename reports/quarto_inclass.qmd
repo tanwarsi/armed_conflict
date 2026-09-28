@@ -150,11 +150,14 @@ Here, we will use `geom_bar()` function within `ggplot()` to create a bar chart 
 ```{r}
 #| echo: FALSE
 
-countries_in_sub_region<- regions %>%
-  group_by(sub_region) %>%
-  summarise(count=length(country_name))
+ggplot(countries_in_sub_region, aes(x= count, y=reorder(sub_region,count), fill=sub_region))+
+  geom_bar(stat="summary")+
+  labs(
+    title = "Number of Countries in Each Sub-Region",
+    y= "Total # of Countries",
+    x= "Region"
+  )
 
-kable(countries_in_sub_region, col.names = c("Sub-Region", "Count"))
-###fix
+
 
 ```
